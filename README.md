@@ -15,5 +15,7 @@ Use “docker container logs rocketmongo_replica” to check if the container is
 Use “docker container logs rocketchat” to check if the rocket.chat container is up. You should see at some point you that local storage is starting and then finally the settings for the rocket.chat container should pop up.
 
 If you see the errors below check the rocketmongo_replica container for errors or wait a bit longer.
-Error: $MONGO_OPLOG_URL must be set to the 'local' database of a Mongo replica set
-MongoError: not master and slaveOk=false
+
+**Error: $MONGO_OPLOG_URL must be set to the 'local' database of a Mongo replica set**
+
+**MongoError: not master and slaveOk=false**
