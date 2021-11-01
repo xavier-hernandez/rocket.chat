@@ -1,0 +1,72 @@
+version: "3.3"
+
+services:
+
+  rocketchat:
+    image: rocketchat/rocket.chat:latest
+    container_name: rocketchat
+    command: >
+      bash -c
+        "for i in `seq 1 30`; do
+          INSTANCE_IP=$$(hostname -i) node main.js &&
+          s=$$? && break || s=$$?;
+          echo \"Tried $$i times. Waiting 5 secs...\";
+          sleep 5;
+        done; (exit $$s)"    
+    restart: unless-stopped
+    volumes:
+      - /root/docker-data/rocket/uploads:/app/uploads
+    environment:
+      - PORT=3000
+      - ROOT_URL=https://[YOUR URL]
+      - MONGO_URL=mongodb://[IP ADDRESS]:27017/rocketchat
+      - MONGO_OPLOG_URL=mongodb://[IP ADDRESS]:27017/local
+      - MAIL_URL=smtp://smtp.email
+    depends_on:
+      - mongo
+    network_mode: host      
+      
+  mongo:
+    container_name: rocketmongo
+    image: mongo:4.2
+    restart: unless-stopped
+    volumes:
+     - /root/docker-data/mongo/data/db:/data/db
+    command: mongod --oplogSize 128 --replSet rs0 --storageEngine=wiredTiger     
+    network_mode: host
+    
+  mongo-init-replica:
+    container_name: rocketmongo_replica
+    image: mongo:4.2
+    command: >
+      bash -c
+        "for i in `seq 1 30`; do
+          mongo [IP ADDRESS]/rocketchat --eval \"
+            rs.initiate({
+              _id: 'rs0',
+              members: [ { _id: 0, host: '[IP ADDRESS]:27017' } ]})\" &&
+          s=$$? && break || s=$$?;
+          echo \"Tried $$i times. Waiting 5 secs...\";
+          sleep 5;
+        done; (exit $$s)"
+    depends_on:
+      - mongo
+    network_mode: host      
+
+  hubot:
+    container_name: hubot
+    image: rocketchat/hubot-rocketchat:latest
+    restart: unless-stopped
+    environment:
+      - ROCKETCHAT_URL=http://[IP ADDRESS]:3000
+      - ROCKETCHAT_ROOM=GENERAL
+      - ROCKETCHAT_USER=hubot
+      - ROCKETCHAT_PASSWORD=[CREATE A PASSWORD]
+      - BOT_NAME=hubot
+      - EXTERNAL_SCRIPTS=hubot-pugme,hubot-help,hubot-diagnostics
+    depends_on:
+      - rocketchat
+    volumes:
+      - /root/docker-data/hubot/scripts:/home/hubot/scripts
+    network_mode: host
+
