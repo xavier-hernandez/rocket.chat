@@ -4,9 +4,11 @@ Built this using Mongo 4.2 because I could not find an example out there with 4.
 
 So here you are.
 
-Replace [YOUR URL] with the URL you are going to use for your website. I'm assuming your using a proxy for this like Nginx Proxy Manager. Setup the proxy to hit the IP address of your docker container/server and use port 3000. You need to use your URL within the docker container otherwise the application won't work properly because your breaking HTTPS. You can investigate your browser’s dev tools to see these errors.
+For this example I put the volumes in the root folder. Everyone has a root folder right? so it should work for everyone. **But I would definitely change that.**
 
-Replace [IP ADDRESS] with the IP of your server.
+Replace **[YOUR URL]** with the URL you are going to use for your website. I'm assuming your using a proxy for this like Nginx Proxy Manager. Setup the proxy to hit the IP address of your docker container/server and use port 3000. You need to use your URL within the docker container otherwise the application won't work properly because your breaking HTTPS. You can investigate your browser’s dev tools to see these errors.
+
+Replace **[IP ADDRESS]** with the IP of your server.
 
 Once you bring up the docker containers it takes some time for rocket.chat to actually come up. Give it a minute or two. The reason for this is because the Mongo Init Replica docker needs to make some changes to the MongoDB container.
 
