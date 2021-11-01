@@ -1,4 +1,4 @@
-# rocket.chat
+# rocket.chat (Mongo 4.2)
 
 Built this using Mongo 4.2 because I could not find an example out there with 4.2. I could only find 4.0 and then you needed to migrate to 4.2. I didn't understand why you had to do that when installing from scratch.
 
