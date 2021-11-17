@@ -21,3 +21,28 @@ If you see the errors below check the rocketmongo_replica container for errors o
 **Error: $MONGO_OPLOG_URL must be set to the 'local' database of a Mongo replica set**
 
 **MongoError: not master and slaveOk=false**
+
+# 11/17/2021 Update docker-compose.yml file due to a breaking update caused when using ":latest". Rocket.chat container was producing error below.
+Error: Can't find migration version 243
+    at migrateDatabase (server/lib/migrations.ts:229:9)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
+    at migrateDatabase (server/lib/migrations.ts:181:11)
