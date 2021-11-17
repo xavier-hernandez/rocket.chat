@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   rocketchat:
-    image: rocketchat/rocket.chat:latest
+    image: rocketchat/rocket.chat:4.1.2
     container_name: rocketchat
     command: >
       bash -c
